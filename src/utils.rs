@@ -12,14 +12,10 @@ pub fn bit_scan(bit: u64) -> usize {
 }
 
 pub fn bit_scan_backwards(bit: u64) -> usize {
-    // 0010000 = 16 = 2^4 -> index of 1 = log_2(0010000)
-    // 0010010 = 18 = 2^4.2 -> log_2(0010010) = 4.2 = between 4-5
-    // 0100000
     (bit as f64).log2().floor() as usize
 }
 
 pub fn extract_bits(mut bits: u64) -> Vec<usize> {
-    // 00101 -> [0, 2]
     let mut result = vec![];
     while bits != 0 {
         let next_bit = bit_scan(bits);

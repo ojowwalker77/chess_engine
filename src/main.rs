@@ -8,6 +8,7 @@ mod utils;
 use knightattacks::KnightAttacks;
 use position::*;
 use rayattacks::Rays;
+use utils::*;
 
 pub struct Game {
     position: Position,
@@ -53,8 +54,8 @@ fn main() {
     let not_alot2 = "8/8/8/4N3/2N5/8/8/8 w - - 0 1";
     let game = Position::read_FEN(not_alot2);
 
-    // let (first_row, rest) = split_on(fen_str, ' ');
-    // println!("First: {}, second: {}", first_row, rest);
+    let (first_row, rest) = split_on(fen_str, ' ');
+    println!("First: {}, second: {}", first_row, rest);
     println!("{}", game.to_string());
     println!(
         "{:?}, {:?}, {}",

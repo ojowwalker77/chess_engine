@@ -1,5 +1,3 @@
-
-
 #[allow(unused_imports)]
 use crate::knightattacks::*;
 use crate::position::PieceType::*;
@@ -103,7 +101,6 @@ fn king_is_in_check(
     ray_attacks: &Rays,
     knight_attacks: &KnightAttacks,
 ) -> bool {
-    // Check rays
     let enemy_color = color.opposite();
     // let ray_attacks = &game.ray_attacks;
 
@@ -131,7 +128,6 @@ fn king_is_in_check(
         return true;
     }
 
-    // Check knight attacks
     let knight_attacks = knight_attacks.0[bit_scan(king.position)];
     let enemy_occupancy = match king.color {
         Color::White => position.black_occupancy,
@@ -155,9 +151,7 @@ fn king_is_in_check(
         }
     }
 
-    // Check for whether the enemy king is attacking our king
     let (row, col) = rowcol(bit_scan(king.position));
-    // Direction in which we need to check for enemy pawns
     let direction = match king.color {
         Color::White => 1,
         Color::Black => -1,
@@ -195,8 +189,6 @@ fn generate_knight_moves(piece: &Piece, game: &Game) -> Vec<Position> {
     let mut attacks = game.knight_attacks.0[bit_scan(piece.position)];
     let position = &game.position;
 
-    // Check if any squares are occupied by our own pieces
-    // Remove those squares
     let own_occupancy = match piece.color {
         Color::White => position.white_occupancy,
         Color::Black => position.black_occupancy,
@@ -205,9 +197,7 @@ fn generate_knight_moves(piece: &Piece, game: &Game) -> Vec<Position> {
 
     let potential_moves = extract_bits(attacks);
     let mut new_positions = vec![];
-    // Remove those pieces if the square is selected as the move
     for pmove in potential_moves {
-        // Start by making a new Position where the knight is moved
         let mut new_position = (*game).position.clone();
         new_position.move_piece(piece.position, pmove);
         new_positions.push(new_position);
@@ -330,8 +320,6 @@ fn generate_king_moves(piece: &Piece, game: &Game) -> Vec<Position> {
 
 fn generate_pawn_moves(piece: &Piece, game: &Game) -> Vec<Position> {
     // Consider all possible moves (en passant is possible if the en passant field in the position is set)
-    // After making a move we need to decide if the en passant field should be updated
-    // The en passant field should be cleared after almost any move
     let position_index = bit_scan(piece.position);
     let (row, col) = rowcol(position_index);
 

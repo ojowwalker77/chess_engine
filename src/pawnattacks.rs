@@ -40,15 +40,6 @@ impl PawnAttacks {
     }
 }
 
-// 0 0 0 0 0 0 0 0
-// 0 0 0 0 0 0 0 0
-// 0 0 0 0 0 0 0 0
-// 0 0 0 0 0 0 0 0
-// 0 0 0 0 0 0 0 0
-// 0 0 0 0 0 0 0 0
-// 0 0 0 0 0 0 0 0
-// 0 0 0 0 0 0 0 0
-
 fn forward_move(row: i32, col: i32, color: Color) -> Bitboard {
     if row == 1 || row == 8 {
         return 0;

@@ -20,12 +20,6 @@ impl KnightAttacks {
 }
 
 fn knight_attacks(row: i32, col: i32) -> Bitboard {
-    // row - 2, col - 1
-    // row - 2, col + 1
-    // row - 1, col - 2
-    // row - 1, col + 2,
-    // ..
-
     let attack_pairs = [
         (1, 2),
         (1, -2),
